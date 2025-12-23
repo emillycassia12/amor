@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>365 Coisas Pra Te Amar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f6f3ef;
+    font-family: "Playfair Display", serif;
+    color: #2b2b2b;
+    text-align: center;
+  }
+
+  h1 {
+    margin: 40px 20px 10px;
+    font-size: 38px;
+  }
+
+  p {
+    margin-bottom: 30px;
+    color: #666;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    gap: 12px;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .cell {
+    position: relative;
+  }
+
+  .message {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    font-size: 14px;
+    width: 160px;
+    display: none;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  button {
+    width: 60px;
+    height: 45px;
+    background: #fff;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    background: #2b2b2b;
+    color: #fff;
+  }
+
+  /* BOTÃO PRÓXIMA PÁGINA */
+  .next {
+    margin: 60px 0;
+  }
+
+  .next a {
+    display: inline-block;
+    padding: 16px 30px;
+    font-size: 18px;
+    background: #2b2b2b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+
+  .next a:hover {
+    background: #555;
+    transform: scale(1.05);
+  }
+</style>
+</head>
+<body>
+
+<h1>365 Coisas Pra Te Amar</h1>
+<p>Uma razão por dia. Ou todas de uma vez.</p>
+
+<div class="grid" id="grid"></div>
+
+<div class="next">
+  <a href="pasta12.html">PRÓXIMA PÁGINA →</a>
+</div>
+
+<script>
+  const reasons = ["Seu sorriso.",
+"Seu abraço.",
+"Seu jeito calmo.",
+"Sua risada.",
+"Seu cuidado.",
+"Seu olhar.",
+"Sua paciência.",
+"Seu carinho.",
+"Seu apoio.",
+"Sua presença.",
+"Seu jeito de ouvir.",
+"Sua atenção.",
+"Seu respeito.",
+"Sua sinceridade.",
+"Seu companheirismo.",
+"Sua proteção.",
+"Seu jeito de amar.",
+"Sua dedicação.",
+"Seu coração.",
+"Sua empatia.",
+"Seu jeito gentil.",
+"Sua força.",
+"Sua calma.",
+"Seu jeito verdadeiro.",
+"Sua honestidade.",
+"Seu toque.",
+"Seu cheiro.",
+"Seu sorriso fácil.",
+"Seu abraço apertado.",
+"Seu cuidado diário.",
+"Sua compreensão.",
+"Seu apoio constante.",
+"Seu jeito simples.",
+"Seu jeito único.",
+"Sua lealdade.",
+"Seu olhar sincero.",
+"Seu carinho silencioso.",
+"Sua presença firme.",
+"Seu amor leve.",
+"Seu amor intenso.",
+"Seu amor verdadeiro.",
+"Seu jeito de ficar.",
+"Seu jeito de escolher.",
+"Seu jeito de proteger.",
+"Seu jeito de cuidar.",
+"Seu jeito de tentar.",
+"Seu jeito de ser.",
+"Sua alegria.",
+"Seu bom humor.",
+"Sua maturidade.",
+"Sua sensibilidade.",
+"Sua espontaneidade.",
+"Sua doçura.",
+"Sua firmeza.",
+"Sua segurança.",
+"Sua verdade.",
+"Sua constância.",
+"Sua atenção aos detalhes.",
+"Seu cuidado comigo.",
+"Seu jeito paciente.",
+"Seu jeito protetor.",
+"Seu jeito atencioso.",
+"Seu jeito carinhoso.",
+"Seu jeito respeitoso.",
+"Seu jeito sincero.",
+"Seu jeito amoroso.",
+"Seu jeito presente.",
+"Seu jeito confiável.",
+"Sua calma nos momentos difíceis.",
+"Sua força nos dias ruins.",
+"Sua presença nos dias bons.",
+"Seu apoio quando preciso.",
+"Seu carinho quando tudo pesa.",
+"Seu abraço quando tudo dói.",
+"Sua mão quando tudo treme.",
+"Sua voz que acalma.",
+"Seu olhar que entende.",
+"Seu silêncio que acolhe.",
+"Seu amor que fica.",
+"Seu amor que cuida.",
+"Seu amor que protege.",
+"Seu amor que soma.",
+"Seu amor que constrói.",
+"Seu amor que permanece.",
+"Seu jeito de ser casa.",
+"Seu jeito de ser abrigo.",
+"Seu jeito de ser porto.",
+"Seu jeito de ser calma.",
+"Seu jeito de ser amor.",
+"Seu jeito de ser nós.",
+"Seu jeito de existir comigo.",
+"Seu jeito de caminhar comigo.",
+"Seu jeito de sonhar comigo.",
+"Seu jeito de crescer comigo.",
+"Seu jeito de lutar comigo.",
+"Seu jeito de construir comigo.",
+"Seu jeito de dividir a vida.",
+"Seu jeito de somar amor.",
+"Seu jeito de compartilhar.",
+"Seu jeito de permanecer.",
+"Seu sorriso ao me ver.",
+"Seu sorriso sem motivo.",
+"Seu sorriso sincero.",
+"Seu sorriso verdadeiro.",
+"Seu sorriso que ilumina.",
+"Seu sorriso que aquece.",
+"Seu sorriso que acalma.",
+"Seu sorriso que fica.",
+"Seu sorriso que encanta.",
+"Seu sorriso que conforta.",
+"Seu abraço demorado.",
+"Seu abraço apertado.",
+"Seu abraço seguro.",
+"Seu abraço quente.",
+"Seu abraço verdadeiro.",
+"Seu abraço que protege.",
+"Seu abraço que acalma.",
+"Seu abraço que conforta.",
+"Seu abraço que fica.",
+"Seu abraço que cura.",
+"Seu jeito de cuidar de mim.",
+"Seu jeito de me ouvir.",
+"Seu jeito de me entender.",
+"Seu jeito de me respeitar.",
+"Seu jeito de me apoiar.",
+"Seu jeito de me proteger.",
+"Seu jeito de me escolher.",
+"Seu jeito de me amar.",
+"Seu jeito de ficar comigo.",
+"Seu jeito de ser comigo.",
+"Sua presença constante.",
+"Sua atenção sincera.",
+"Sua dedicação diária.",
+"Sua paciência bonita.",
+"Sua entrega verdadeira.",
+"Sua proteção silenciosa.",
+"Sua força tranquila.",
+"Sua calma necessária.",
+"Sua verdade inteira.",
+"Sua lealdade firme.",
+"Seu carinho nos detalhes.",
+"Seu amor nas atitudes.",
+"Seu respeito nas palavras.",
+"Sua sinceridade nos gestos.",
+"Sua presença que conforta.",
+"Seu toque que acalma.",
+"Seu olhar que cuida.",
+"Seu abraço que protege.",
+"Seu beijo que fica.",
+"Seu jeito de continuar.",
+"Seu jeito de insistir.",
+"Seu jeito de tentar de novo.",
+"Seu jeito de não desistir.",
+"Seu jeito de permanecer.",
+"Seu jeito de acreditar.",
+"Seu jeito de confiar.",
+"Seu jeito de cuidar do nós.",
+"Seu jeito de construir futuro.",
+"Seu jeito de amar inteiro.",
+"Sua constância diária.",
+"Sua firmeza emocional.",
+"Sua verdade sempre.",
+"Sua entrega real.",
+"Sua presença fiel.",
+"Sua atenção genuína.",
+"Sua calma constante.",
+"Sua força serena.",
+"Sua lealdade rara.",
+"Seu amor seguro.",
+"Seu jeito de dividir sonhos.",
+"Seu jeito de somar planos.",
+"Seu jeito de multiplicar amor.",
+"Seu jeito de construir juntos.",
+"Seu jeito de permanecer juntos.",
+"Seu jeito de acreditar no nós.",
+"Seu jeito de confiar no amor.",
+"Seu jeito de tentar sempre.",
+"Seu jeito de amar sempre.",
+"Seu jeito de ficar sempre.",
+"Seu olhar quando tudo aperta.",
+"Seu abraço quando tudo pesa.",
+"Seu sorriso quando tudo melhora.",
+"Sua mão quando tudo cai.",
+"Sua voz quando tudo silencia.",
+"Sua presença quando tudo falta.",
+"Seu amor quando tudo dói.",
+"Seu cuidado quando tudo cansa.",
+"Seu apoio quando tudo falha.",
+"Seu amor quando tudo fica.",
+"Seu jeito simples de amar.",
+"Seu jeito real de sentir.",
+"Seu jeito inteiro de ser.",
+"Seu jeito bonito de cuidar.",
+"Seu jeito forte de ficar.",
+"Seu jeito doce de falar.",
+"Seu jeito firme de amar.",
+"Seu jeito calmo de existir.",
+"Seu jeito intenso de sentir.",
+"Seu jeito verdadeiro de amar.",
+"Seu amor diário.",
+"Seu amor constante.",
+"Seu amor paciente.",
+"Seu amor sincero.",
+"Seu amor firme.",
+"Seu amor leve.",
+"Seu amor intenso.",
+"Seu amor bonito.",
+"Seu amor real.",
+"Seu amor inteiro.",
+"Seu jeito de escolher sempre.",
+"Seu jeito de ficar sempre.",
+"Seu jeito de cuidar sempre.",
+"Seu jeito de amar sempre.",
+"Seu jeito de proteger sempre.",
+"Seu jeito de apoiar sempre.",
+"Seu jeito de respeitar sempre.",
+"Seu jeito de ouvir sempre.",
+"Seu jeito de entender sempre.",
+"Seu jeito de ser sempre.",
+"Seu carinho sem pedir.",
+"Seu cuidado sem cobrar.",
+"Seu amor sem medida.",
+"Seu respeito sem limite.",
+"Sua presença sem falta.",
+"Seu apoio sem dúvida.",
+"Seu abraço sem pressa.",
+"Seu beijo sem tempo.",
+"Seu olhar sem mentira.",
+"Seu amor sem fim.",
+"Seu jeito de continuar comigo.",
+"Seu jeito de permanecer comigo.",
+"Seu jeito de insistir por nós.",
+"Seu jeito de tentar por nós.",
+"Seu jeito de cuidar de nós.",
+"Seu jeito de amar nós.",
+"Seu jeito de escolher nós.",
+"Seu jeito de ficar nós.",
+"Seu jeito de respeitar nós.",
+"Seu jeito de proteger nós.",
+"Seu amor que cresce.",
+"Seu amor que fica.",
+"Seu amor que cuida.",
+"Seu amor que acolhe.",
+"Seu amor que protege.",
+"Seu amor que respeita.",
+"Seu amor que entende.",
+"Seu amor que soma.",
+"Seu amor que constrói.",
+"Seu amor que permanece.",
+"Seu jeito de me amar.",
+"Seu jeito de me cuidar.",
+"Seu jeito de me proteger.",
+"Seu jeito de me apoiar.",
+"Seu jeito de me respeitar.",
+"Seu jeito de me ouvir.",
+"Seu jeito de me entender.",
+"Seu jeito de me escolher.",
+"Seu jeito de ficar.",
+"Seu jeito de ser.",
+"Seu olhar que acalma.",
+"Seu sorriso que cura.",
+"Seu abraço que protege.",
+"Seu toque que conforta.",
+"Sua voz que tranquiliza.",
+"Sua presença que fortalece.",
+"Seu amor que sustenta.",
+"Seu cuidado que acolhe.",
+"Seu carinho que fica.",
+"Seu amor que permanece.",
+"Seu jeito de existir comigo.",
+"Seu jeito de caminhar comigo.",
+"Seu jeito de ficar comigo.",
+"Seu jeito de sonhar comigo.",
+"Seu jeito de lutar comigo.",
+"Seu jeito de crescer comigo.",
+"Seu jeito de construir comigo.",
+"Seu jeito de amar comigo.",
+"Seu jeito de ser comigo.",
+"Seu jeito de ser nós.",
+"Porque você é você.",
+"Porque você é real.",
+"Porque você é inteiro.",
+"Porque você é verdadeiro.",
+"Porque você é constante.",
+"Porque você é firme.",
+"Porque você é presente.",
+"Porque você é amor.",
+"Porque você é cuidado.",
+"Porque você é escolha.",
+"Porque você fica.",
+"Porque você tenta.",
+"Porque você cuida.",
+"Porque você respeita.",
+"Porque você protege.",
+"Porque você apoia.",
+"Porque você escuta.",
+"Porque você entende.",
+"Porque você permanece.",
+"Porque você ama.",
+"Porque com você é leve.",
+"Porque com você é real.",
+"Porque com você é inteiro.",
+"Porque com você é seguro.",
+"Porque com você é casa.",
+"Porque com você é porto.",
+"Porque com você é abrigo.",
+"Porque com você é amor.",
+"Porque com você é nós.",
+"Porque com você é verdade.",
+"Porque você é meu apoio.",
+"Porque você é meu cuidado.",
+"Porque você é minha calma.",
+"Porque você é minha força.",
+"Porque você é minha escolha.",
+"Porque você é meu amor.",
+"Porque você é meu lar.",
+"Porque você é meu tudo.",
+"Porque você é meu sempre.",
+"Porque é você."
+
+  ];
+
+  const grid = document.getElementById("grid");
+
+  for (let i = 1; i <= 365; i++) {
+    const cell = document.createElement("div");
+    cell.className = "cell";
+
+    const msg = document.createElement("div");
+    msg.className = "message";
+
+    const btn = document.createElement("button");
+    btn.textContent = i;
+
+    btn.onclick = () => {
+      msg.textContent = reasons[(i - 1) % reasons.length];
+      msg.style.display = "block";
+
+      setTimeout(() => {
+        msg.style.display = "none";
+      }, 5000);
+    };
+
+    cell.appendChild(msg);
+    cell.appendChild(btn);
+    grid.appendChild(cell);
+  }
+</script>
+
+</body>
+</html>

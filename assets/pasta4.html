@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dactilografia Viva</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f3efe6;
+    font-family: "Courier New", monospace;
+    color: #2a2a2a;
+    cursor: none;
+  }
+
+  .paper {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 50px 50px 60px;
+    background: #f8f3e8;
+    box-shadow: 0 0 40px rgba(0,0,0,0.2);
+    line-height: 1.8;
+    font-size: 18px;
+    min-height: 70vh;
+    position: relative;
+  }
+
+  /* DATA NO TOPO */
+  .date {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 14px;
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* CURSOR DE TINTA */
+  .cursor-ink {
+    position: fixed;
+    width: 18px;
+    height: 18px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  /* CORAÇÕES CARIMBADOS */
+  .stamp {
+    position: absolute;
+    font-size: 18px;
+    color: rgba(150, 0, 0, 0.5);
+    user-select: none;
+  }
+
+  .no-delete {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    opacity: 0.7;
+    display: none;
+  }
+
+  /* SETA PRÓXIMA PÁGINA (MAIOR) */
+  .next {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 20;
+  }
+
+  .next a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    font-size: 42px;
+    text-decoration: none;
+    color: #2a2a2a;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .next a:hover {
+    transform: scale(1.15);
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="paper" id="paper">
+  <div class="date">28 · 12 · 2024</div>
+</div>
+
+<div class="cursor-ink" id="ink"></div>
+
+<div class="no-delete" id="noDelete">
+  Nossa história não pode ser apagada.
+</div>
+
+<!-- SETA PARA PRÓXIMA PÁGINA -->
+<div class="next">
+  <a href="pasta6.html">→</a>
+</div>
+
+<script>
+  const text = `
+  A nossa historia é linda, tudo que vivemos, todos os momentos 
+  amveis e tudo q nos fez nos apaixonarmos que se tornou algo tão lindo  adimirar,
+
+  esse amor lindo que vivemos, que estamos sentindo a um ano,
+  esse amor lindo que viveremos por toda a eternidade
+
+  esse amor que surgiu de uma forma estranha e que se tornou 
+  admiravel, esse amor cheio de erros mas principalmente cheio
+   de amor, parceria, companherismo e tudo de bom dessa vida. 
+  `;
+
+  const paper = document.getElementById("paper");
+  let index = 0;
+
+  function typeWriter() {
+    if (index < text.length) {
+      paper.innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 60);
+    }
+  }
+
+  typeWriter();
+
+  /* CURSOR MANCHA DE TINTA */
+  const ink = document.getElementById("ink");
+  document.addEventListener("mousemove", e => {
+    ink.style.left = e.clientX + "px";
+    ink.style.top = e.clientY + "px";
+  });
+
+  /* CARIMBAR CORAÇÕES */
+  paper.addEventListener("click", e => {
+    const heart = document.createElement("div");
+    heart.className = "stamp";
+    heart.style.left = e.offsetX + "px";
+    heart.style.top = e.offsetY + "px";
+    heart.textContent = "♥";
+    paper.appendChild(heart);
+  });
+
+  /* BLOQUEAR APAGAR */
+  const noDelete = document.getElementById("noDelete");
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Backspace" || e.key === "Delete") {
+      e.preventDefault();
+      noDelete.style.display = "block";
+      setTimeout(() => {
+        noDelete.style.display = "none";
+      }, 3000);
+    }
+  });
+</script>
+
+</body>
+</html>
+

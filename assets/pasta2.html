@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Constelações do Nosso Dia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #0b132b, #000);
+      color: #eaeaea;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .sky {
+      min-height: 100vh;
+      padding: 80px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .date {
+      font-size: 15px;
+      letter-spacing: 3px;
+      color: #9bbcff;
+      margin-bottom: 60px;
+    }
+
+    /* CONSTELAÇÃO */
+    .constellations {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      height: 420px;
+      margin-bottom: 80px;
+    }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255,255,255,1);
+    }
+
+    .line {
+      position: absolute;
+      height: 1px;
+      background: rgba(155,188,255,0.9);
+      transform-origin: left center;
+    }
+
+    /* TEXTO */
+    .text {
+      max-width: 700px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.8;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .text span {
+      color: #9bbcff;
+    }
+
+    /* BOTÃO */
+    .next {
+      margin-top: 60px;
+    }
+
+    .next a {
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #eaeaea;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 4px;
+      transition: opacity 0.3s;
+    }
+
+    .next a:hover {
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sky">
+    <h1>As Constelações do Nosso Dia</h1>
+    <div class="date">28 · 12 · 2024</div>
+
+    <!-- CONSTELAÇÃO VISÍVEL -->
+    <div class="constellations">
+      <!-- Estrelas -->
+      <div class="star" style="top:60px; left:120px"></div>
+      <div class="star" style="top:140px; left:200px"></div>
+      <div class="star" style="top:100px; left:320px"></div>
+      <div class="star" style="top:200px; left:420px"></div>
+      <div class="star" style="top:280px; left:520px"></div>
+      <div class="star" style="top:230px; left:650px"></div>
+
+      <!-- Conexões -->
+      <div class="line" style="top:62px; left:120px; width:110px; transform:rotate(32deg)"></div>
+      <div class="line" style="top:142px; left:200px; width:140px; transform:rotate(-18deg)"></div>
+      <div class="line" style="top:102px; left:320px; width:140px; transform:rotate(32deg)"></div>
+      <div class="line" style="top:202px; left:420px; width:160px; transform:rotate(30deg)"></div>
+      <div class="line" style="top:282px; left:520px; width:160px; transform:rotate(-20deg)"></div>
+    </div>
+
+    <!-- TEXTO POÉTICO -->
+    <div class="text">
+      Naquela noite, as estrelas já estavam no céu.<br>
+      Mas foi em <span>28 de dezembro de 2024</span> que els se alinharam.<br><br>
+      Algumas conexões não são vistas de imediato.<br>
+      Elas só existem quando duas vidas se encontram<br>
+      e decidem seguir na mesma direção.<br><br>
+      O céu sempre teve constelações.<br>
+      A minha favorita começou quando nosso amor as formou.
+    </div>
+
+    <!-- PRÓXIMA PÁGINA -->
+    <div class="next">
+      <a href="pasta3.html">PRÓXIMA PÁGINA →</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

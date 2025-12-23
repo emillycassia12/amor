@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>The Spike Plant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  .button {
+    padding: 20px 40px;
+    border: 2px solid #ff4655;
+    color: #ff4655;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    letter-spacing: 2px;
+  }
+
+  .status {
+    margin-top: 30px;
+    font-size: 16px;
+    height: 24px;
+    color: #aaa;
+  }
+
+  /* TELA FINAL */
+  .final {
+    display: none;
+    background: #ffffff;
+    color: #000;
+    position: fixed;
+    inset: 0;
+    text-align: center;
+    padding-top: 120px;
+  }
+
+  .final h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .timer {
+    font-size: 28px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+  }
+
+  .next {
+    margin-top: 60px;
+    font-size: 18px;
+    letter-spacing: 3px;
+  }
+
+  .next a {
+    text-decoration: none;
+    color: #000;
+    border-bottom: 1px solid #000;
+    padding-bottom: 4px;
+  }
+
+  .next a:hover {
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="plantScreen">
+  <button class="button" id="plantBtn">
+    MANTENHA PRESSIONADO<br>PARA PLANTAR O AMOR
+  </button>
+  <div class="status" id="statusText"></div>
+</div>
+
+<div class="final" id="finalScreen">
+  <h1>A Spike do nosso amor foi plantada.</h1>
+  <p>Não há como desarmar.</p>
+
+  <div class="timer" id="timer"></div>
+
+  <!-- BOTÃO PRÓXIMA PÁGINA -->
+  <div class="next">
+    <a href="pasta10.html">PRÓXIMA PÁGINA →</a>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('plantBtn');
+  const statusText = document.getElementById('statusText');
+  const plantScreen = document.getElementById('plantScreen');
+  const finalScreen = document.getElementById('finalScreen');
+  let holdTime = 0;
+  let holding = false;
+
+  const messages = [
+    "Preparando futuro...",
+    "Armando memórias...",
+    "Definindo destino..."
+  ];
+
+  let msgIndex = 0;
+
+  btn.addEventListener('mousedown', startHold);
+  btn.addEventListener('touchstart', startHold);
+
+  btn.addEventListener('mouseup', stopHold);
+  btn.addEventListener('mouseleave', stopHold);
+  btn.addEventListener('touchend', stopHold);
+
+  function startHold() {
+    holding = true;
+    holdTime = 0;
+    msgIndex = 0;
+
+    const interval = setInterval(() => {
+      if (!holding) {
+        clearInterval(interval);
+        statusText.textContent = "";
+        return;
+      }
+
+      holdTime += 1000;
+      statusText.textContent = messages[msgIndex] || "";
+      msgIndex++;
+
+      if (holdTime >= 4000) {
+        clearInterval(interval);
+        plant();
+      }
+    }, 1000);
+  }
+
+  function stopHold() {
+    holding = false;
+  }
+
+  function plant() {
+    plantScreen.style.display = "none";
+    finalScreen.style.display = "block";
+    startTimer();
+  }
+
+  function startTimer() {
+    const totalSeconds = 365 * 24 * 60 * 60;
+    let seconds = totalSeconds;
+
+    setInterval(() => {
+      const days = Math.floor(seconds / 86400);
+      const hours = Math.floor((seconds % 86400) / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+
+      timer.textContent =
+        `${days}d ${hours}h ${minutes}m ${secs}s`;
+
+      seconds--;
+    }, 1000);
+  }
+</script>
+
+</body>
+</html>

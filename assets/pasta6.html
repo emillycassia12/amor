@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Caça-Palavras</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    background: #f7f5f2;
+    font-family: 'Georgia', serif;
+    text-align: center;
+    color: #2b2b2b;
+  }
+
+  h1 {
+    margin-top: 40px;
+    font-size: 36px;
+  }
+
+  p {
+    color: #666;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    gap: 6px;
+    justify-content: center;
+    margin: 40px auto;
+  }
+
+  .cell {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .cell.selected {
+    background: #2b2b2b;
+    color: #fff;
+  }
+
+  .cell.found {
+    background: #d4b48c;
+    color: #fff;
+  }
+
+  .words {
+    max-width: 500px;
+    margin: auto;
+    font-size: 18px;
+  }
+
+  .words span {
+    margin: 6px;
+    display: inline-block;
+  }
+
+  .found-word {
+    text-decoration: line-through;
+    color: #aaa;
+  }
+
+  .next {
+    margin: 60px 0;
+    font-size: 24px;
+  }
+
+  .next a {
+    text-decoration: none;
+    color: #2b2b2b;
+  }
+
+  .next a:hover {
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<h1>Caça-Palavras</h1>
+<p>Algumas conexões não se veem, mas estão lá.</p>
+
+<div class="grid" id="grid"></div>
+
+<div class="words" id="words">
+  <span>AMOR</span>
+  <span>TEMPO</span>
+  <span>DESTINO</span>
+  <span>CONEXÃO</span>
+  <span>CUIDADO</span>
+  <span>PARCERIA</span>
+</div>
+
+<div class="next">
+  <a href="pasta7.html">→</a>
+</div>
+
+<script>
+  const letters = [
+    "A","M","O","R","X","T","E","M","P","O",
+    "D","E","S","T","I","N","O","Y","Z","A",
+    "C","O","N","E","X","A","O","L","M","N",
+    "C","U","I","D","A","D","O","Q","R","S",
+    "P","A","R","C","E","R","I","A","T","U",
+    "W","X","Y","Z","A","B","C","D","E","F"
+  ];
+
+  const grid = document.getElementById("grid");
+  const cells = [];
+  let selected = [];
+
+  letters.forEach(letter => {
+    const div = document.createElement("div");
+    div.className = "cell";
+    div.textContent = letter;
+
+    div.onclick = () => {
+      if (div.classList.contains("found")) return;
+
+      div.classList.toggle("selected");
+
+      if (div.classList.contains("selected")) {
+        selected.push(div);
+      } else {
+        selected = selected.filter(c => c !== div);
+      }
+
+      checkWord();
+    };
+
+    cells.push(div);
+    grid.appendChild(div);
+  });
+
+  const words = ["AMOR","TEMPO","DESTINO","CONEXAO","CUIDADO","PARCERIA"];
+
+  function checkWord() {
+    const word = selected.map(c => c.textContent).join("");
+
+    words.forEach(w => {
+      if (word === w) {
+        selected.forEach(c => {
+          c.classList.remove("selected");
+          c.classList.add("found");
+        });
+
+        document.querySelectorAll(".words span").forEach(span => {
+          if (span.textContent.replace("Ã","A") === w) {
+            span.classList.add("found-word");
+          }
+        });
+
+        selected = [];
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
