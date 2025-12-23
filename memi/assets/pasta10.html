@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz do Amor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      background: #f7f5f2;
+      font-family: Arial, sans-serif;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 40px 20px 10px;
+      letter-spacing: 2px;
+      font-weight: normal;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    .quiz {
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .question {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 25px 20px;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .question h2 {
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+    .options button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.3s;
+    }
+
+    .options button:hover {
+      background: #eee;
+    }
+
+    .correct {
+      background: #d4edda !important;
+      border-color: #28a745;
+      color: #155724;
+    }
+
+    .wrong {
+      background: #f8d7da !important;
+      border-color: #dc3545;
+      color: #721c24;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-size: 14px;
+      display: none;
+    }
+
+    /* PRÓXIMA PÁGINA */
+    .next {
+      margin: 50px 0;
+    }
+
+    .next a {
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #222;
+      border-bottom: 1px solid #222;
+      padding-bottom: 4px;
+    }
+
+    .next a:hover {
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>QUIZ DO AMOR</h1>
+  <div class="subtitle">5 perguntas sobre a nossa história 💕</div>
+
+  <div class="quiz">
+
+    <!-- QUESTÃO 1 -->
+    <div class="question">
+      <h2>1. quando foi a primeira vez q conversamos?</h2>
+      <div class="options">
+        <button onclick="answer(this, true)">27/07/2024</button>
+        <button onclick="answer(this, false)">28/08/2024</button>
+        <button onclick="answer(this, false)">28/07/2024</button>
+      </div>
+      <div class="feedback">o melhor dia d minh vida.</div>
+    </div>
+
+    <!-- QUESTÃO 2 -->
+    <div class="question">
+      <h2>2. Nosso primeiro beijo foi:</h2>
+      <div class="options">
+        <button onclick="answer(this, false)">na minha casa</button>
+        <button onclick="answer(this, true)">de frente pro mar</button>
+        <button onclick="answer(this, false)">no casarão</button>
+      </div>
+      <div class="feedback">Me da borboletas só de lembrar.</div>
+    </div>
+
+    <!-- QUESTÃO 3 -->
+    <div class="question">
+      <h2>3. O que faz um dia comum virar especial?</h2>
+      <div class="options">
+        <button onclick="answer(this, false)">Dinheiro</button>
+        <button onclick="answer(this, true)">A presença um do outro</button>
+        <button onclick="answer(this, false)">Lugar luxuoso</button>
+      </div>
+      <div class="feedback">Quando estamos juntos, tudo ganha sentido.</div>
+    </div>
+
+    <!-- QUESTÃO 4 -->
+    <div class="question">
+      <h2>4. qual é minha caracteristica favorita sua?</h2>
+      <div class="options">
+        <button onclick="answer(this, true)">Sorriso e olhos</button>
+        <button onclick="answer(this, false)">sua boca</button>
+        <button onclick="answer(this, false)">suas mãos</button>
+      </div>
+      <div class="feedback">eu amo vc por inteiro.</div>
+    </div>
+
+    <!-- QUESTÃO 5 -->
+    <div class="question">
+      <h2>5. Nosso amor é:</h2>
+      <div class="options">
+        <button onclick="answer(this, false)">razo</button>
+        <button onclick="answer(this, false)">temporario</button>
+        <button onclick="answer(this, true)">eterno</button>
+      </div>
+      <div class="feedback">Seremos para todo sempre.</div>
+    </div>
+
+  </div>
+
+  <div class="next">
+    <a href="pasta11.html">PRÓXIMA PÁGINA →</a>
+  </div>
+
+  <script>
+    function answer(button, isCorrect) {
+      const options = button.parentElement.querySelectorAll("button");
+      const feedback = button.parentElement.parentElement.querySelector(".feedback");
+
+      options.forEach(btn => btn.disabled = true);
+
+      if (isCorrect) {
+        button.classList.add("correct");
+        feedback.style.display = "block";
+      } else {
+        button.classList.add("wrong");
+      }
+    }
+  </script>
+
+</body>
+</html>

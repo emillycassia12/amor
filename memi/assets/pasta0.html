@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Para Você</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
+}
+
+body {
+  height: 100vh;
+  background: #0b0b0b;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  z-index: 2;
+  max-width: 500px;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+a button {
+  padding: 14px 45px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  background: rgb(197, 14, 51);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+a button:hover {
+  transform: scale(1.05);
+  background: rgb(87, 10, 10);
+}
+
+/* CORAÇÕES */
+.heart {
+  position: absolute;
+  top: -20px;
+  color: rgb(255, 251, 251);
+  font-size: 20px;
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  from { transform: translateY(-10px); }
+  to { transform: translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Meu amor</h1>
+  <p>
+    Hoje completamos 1 ano do nosso amor, e para não deixar essa data tão importante passar em branco, fiz esse pequeno gesto para demonstrar o meu amor por voçê, espero que goste, eu te amooo!
+  </p>
+
+  <!-- BOTÃO QUE VAI PARA index1.html -->
+  <a href="pasta1.html">
+    <button>Começar</button>
+  </a>
+</div>
+
+<script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}, 300);
+</script>
+
+</body>
+</html>

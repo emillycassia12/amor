@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Blackout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    font-family: 'Georgia', serif;
+    cursor: none;
+  }
+
+  /* CAMADA DE LUZ */
+  .light {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: radial-gradient(
+      circle 120px at var(--x) var(--y),
+      transparent 0%,
+      rgba(0,0,0,0.85) 60%,
+      black 100%
+    );
+    z-index: 10;
+  }
+
+  /* TEXTO ESCONDIDO */
+  .secret {
+    position: absolute;
+    color: #f5f5f5;
+    font-size: 22px;
+    max-width: 300px;
+    line-height: 1.4;
+  }
+
+  .small {
+    font-size: 16px;
+    opacity: 0.8;
+  }
+
+  /* BOTÃO PRÓXIMA */
+  .next {
+    position: absolute;
+    bottom: 40px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 26px;
+    color: #fff;
+    text-decoration: none;
+    z-index: 20;
+  }
+
+  .next:hover {
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- FRASES ESCONDIDAS -->
+<div class="secret" style="top: 15%; left: 10%;">
+  Desde o início, algo em você me chamou.
+</div>
+
+<div class="secret" style="top: 40%; left: 60%;">
+  28 • 12 • 2024
+  <div class="small">o dia em que nosso amor celebrou</div>
+</div>
+
+<div class="secret" style="top: 65%; left: 20%;">
+  Mesmo no escuro,<br> eu te reconheceria.
+</div>
+
+<div class="secret" style="top: 30%; left: 35%;">
+  Você é meu ponto de luz.
+</div>
+
+<div class="secret" style="top: 55%; left: 75%;">
+  Algumas conexões<br> não precisam ser vistas.
+</div>
+
+<!-- BOTÃO PRÓXIMA PÁGINA -->
+<a class="next" href="pasta8.html">→</a>
+
+<!-- LANTERNA -->
+<div class="light"></div>
+
+<script>
+  const light = document.querySelector('.light');
+
+  document.addEventListener('mousemove', e => {
+    light.style.setProperty('--x', e.clientX + 'px');
+    light.style.setProperty('--y', e.clientY + 'px');
+  });
+</script>
+
+</body>
+</html>
